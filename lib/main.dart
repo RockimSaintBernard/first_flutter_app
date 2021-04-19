@@ -1,14 +1,28 @@
+//revant imports
 import 'package:flutter/material.dart';
+
+//file imports
+import './question.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
   var questionIndex = 0;
   void answerQuestion() {
-    questionIndex = questionIndex + 1;
-    print(questionIndex);
+    setState(() {
+      questionIndex = questionIndex + 1;
+      print(questionIndex);
+    });
   }
 
   var questions = [
@@ -25,7 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            Text(questions.elementAt(0)),
+            Question(
+              questionText:questions[questionIndex],
+            ),
             // ignore: deprecated_member_use
             RaisedButton(
               child: Text("Answer 1"),
@@ -34,14 +50,12 @@ class MyApp extends StatelessWidget {
             // ignore: deprecated_member_use
             RaisedButton(
               child: Text("Answer 2"),
-              onPressed: () {
-                print("Answer 2 choosen!");
-              },
+              onPressed: answerQuestion,
             ),
             // ignore: deprecated_member_use
             RaisedButton(
               child: Text("Answer 3"),
-              onPressed: () => print("Answer 3 choosen!!"),
+              onPressed: answerQuestion,
             ),
           ],
         ),
