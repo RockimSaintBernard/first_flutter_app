@@ -44,16 +44,19 @@ class MyAppState extends State<MyApp> {
             ),
             // ignore: deprecated_member_use
             RaisedButton(
+              color: Colors.blue,
               child: Text("Answer 1"),
               onPressed: answerQuestion,
             ),
             // ignore: deprecated_member_use
             RaisedButton(
+              color: Colors.blue,
               child: Text("Answer 2"),
               onPressed: answerQuestion,
             ),
             // ignore: deprecated_member_use
             RaisedButton(
+              color: Colors.blue,
               child: Text("Answer 3"),
               onPressed: answerQuestion,
             ),
