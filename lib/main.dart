@@ -18,15 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  var questionIndex = 0;
-  void answerQuestion() {
-    setState(() {
-      questionIndex = questionIndex + 1;
-      print(questionIndex);
-    });
-  }
-
-  var questions = [
+  final questions = const [
     {
       "questionText": "What is your favourite colour?",
       "answers": ["Black", "Blue", "Brown", "White"]
@@ -41,6 +33,22 @@ class MyAppState extends State<MyApp> {
     },
   ];
 
+  var questionIndex = 0;
+  void answerQuestion() {
+    //var aBool = true;
+    //aBool = false;
+    setState(() {
+      questionIndex = questionIndex + 1;
+      print(questionIndex);
+    });
+
+    if (questionIndex < questions.length) {
+      print("We have no more questions!");
+    } else {
+      print("No more questions!!!");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,17 +56,18 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("Home Screen"),
         ),
-        body: Column(
+        body: questionIndex < questions.length? Column(
           children: <Widget>[
             Question(
               questionText: questions[questionIndex]["questionText"],
             ),
             // ignore: deprecated_member_use
-            ...(questions[questionIndex]["answers"]as List<String >).map((answer) {
+            ...(questions[questionIndex]["answers"] as List<String>)
+                .map((answer) {
               return Answer(answerQuestion, answer);
             }).toList()
           ],
-        ),
+        ): Center(child:Text("You did it!!!!!!")),
       ),
     );
   }
