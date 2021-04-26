@@ -1,9 +1,12 @@
 //revant imports
 import 'package:flutter/material.dart';
+import 'package:new_flutter_app/result.dart';
 
 //file imports
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
+// import './question.dart';
+// import './answer.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,40 +15,59 @@ void main() {
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return MyAppState();
   }
 }
 
 class MyAppState extends State<MyApp> {
-  final questions = const [
+  final _questions = const [
     {
-      "questionText": "What is your favourite colour?",
-      "answers": ["Black", "Blue", "Brown", "White"]
+      'questionText': 'What\'s your favorite color?',
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
     },
     {
-      "questionText": "Whats on your bucketlist?",
-      "answers": ["Sky diving", "Camping", "Surfing", "Hiking"]
+      'questionText': 'What\'s your favorite animal?',
+      'answers': [
+        {'text': 'Rabbit', 'score': 3},
+        {'text': 'Snake', 'score': 11},
+        {'text': 'Elephant', 'score': 5},
+        {'text': 'Lion', 'score': 9},
+      ],
     },
     {
-      "questionText": "Who is your favourite person?",
-      "answers": ["Rob", "Ben", "Jerry", "Dan"]
+      'questionText': 'Who\'s your favorite instructor?',
+      'answers': [
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+      ],
     },
   ];
+  var _questionIndex = 0;
+  var _totalScore = 0;
 
-  var questionIndex = 0;
-  void answerQuestion() {
+  void _answerQuestion(int score) {
     //var aBool = true;
     //aBool = false;
+    //
+    _totalScore += score;
+    //same as sayng _totalScore += score
+
     setState(() {
-      questionIndex = questionIndex + 1;
-      print(questionIndex);
+      _questionIndex = _questionIndex + 1;
+      print(_questionIndex);
     });
 
-    if (questionIndex < questions.length) {
-      print("We have no more questions!");
+    if (_questionIndex < _questions.length) {
+      print("We have no more _questions!");
     } else {
-      print("No more questions!!!");
+      print("No more _questions!!!");
     }
   }
 
@@ -56,18 +78,12 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("Home Screen"),
         ),
-        body: questionIndex < questions.length? Column(
-          children: <Widget>[
-            Question(
-              questionText: questions[questionIndex]["questionText"],
-            ),
-            // ignore: deprecated_member_use
-            ...(questions[questionIndex]["answers"] as List<String>)
-                .map((answer) {
-              return Answer(answerQuestion, answer);
-            }).toList()
-          ],
-        ): Center(child:Text("You did it!!!!!!")),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions)
+            : Result(_totalScore),
       ),
     );
   }
