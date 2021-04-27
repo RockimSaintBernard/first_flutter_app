@@ -52,11 +52,12 @@ class MyAppState extends State<MyApp> {
   var _questionIndex = 0;
   var _totalScore = 0;
 
-  void _answerQuestion(int score) {
+  void _answerQuestion(var score) {
     //var aBool = true;
     //aBool = false;
     //
-    _totalScore += score;
+    score = 0;
+    _totalScore += _totalScore + score;
     //same as sayng _totalScore += score
 
     setState(() {
