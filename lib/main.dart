@@ -56,8 +56,8 @@ class MyAppState extends State<MyApp> {
     //var aBool = true;
     //aBool = false;
     //
-    score = 0;
-    _totalScore += _totalScore + score;
+   
+    _totalScore += score;
     //same as sayng _totalScore += score
 
     setState(() {

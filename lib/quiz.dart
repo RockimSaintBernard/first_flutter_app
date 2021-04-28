@@ -21,7 +21,7 @@ class Quiz extends StatelessWidget {
       ),
       // ignore: deprecated_member_use
       ...(questions[questionIndex]["answers"] as List<Map<String, Object>>).map((answer) {
-        return Answer(() => answerQuestion(answer['scope']), answer['text']);
+        return Answer(() => answerQuestion(answer['score']), answer['text']);
       }).toList()
     ]);
   }
